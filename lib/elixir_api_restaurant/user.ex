@@ -34,12 +34,12 @@ defmodule ElixirApiRestaurant.User do
     email: "email@email.com",
     document: 81_403_849_099,
     password: "123456",
-    phone: 65999999999,
+    phone: 65_999_999_999,
     address_city: "Várzea Grande",
     address_number: 15,
     address_state: "Mato Grosso",
     address_street: "street",
-    zip_code: 78000000
+    zip_code: 78_000_000
   }
   ```
 
@@ -65,12 +65,12 @@ defmodule ElixirApiRestaurant.User do
     email: "email@email.com",
     document: 81_403_849_099,
     password: "Strong",
-    phone: 65999999999,
+    phone: 65_999_999_999,
     address_city: "Várzea Grande",
     address_number: 50,
     address_state: "Mato Grosso",
     address_street: "street",
-    zip_code: 78000000
+    zip_code: 78_000_000
   }
   ```
 
