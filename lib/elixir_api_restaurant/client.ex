@@ -1,4 +1,4 @@
-defmodule ElixirApiRestaurant.User do
+defmodule ElixirApiRestaurant.Client do
   @moduledoc """
   Módulo de usuário (cliente do restaurante)
   """
@@ -28,8 +28,8 @@ defmodule ElixirApiRestaurant.User do
   ## Examples
 
   ```elixir
-  iex> User.build!(%{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
-  %ElixirApiRestaurant.User{
+  iex> Client.build!(%{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  %ElixirApiRestaurant.Client{
     name: "Maria Belizário",
     email: "email@email.com",
     document: 81_403_849_099,
@@ -44,8 +44,8 @@ defmodule ElixirApiRestaurant.User do
   ```
 
   """
-  def build!(%{} = new_user) do
-    struct(__MODULE__, new_user)
+  def build!(%{} = new_client) do
+    struct(__MODULE__, new_client)
   end
 
   @doc ~S"""
@@ -53,14 +53,14 @@ defmodule ElixirApiRestaurant.User do
 
   ## Parameters
 
-  - Estrutura do usuário %ElixirApiRestaurant.User{}
+  - Estrutura do usuário %ElixirApiRestaurant.Client{}
   - Mapa dos campos que deseja atualizar
 
   ## Examples
 
   ```elixir
-  iex> User.update!(%ElixirApiRestaurant.User{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000}, %{name: "Camila Maria", password: "Strong", address_number: 50})
-  %ElixirApiRestaurant.User{
+  iex> Client.update!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000}, %{name: "Camila Maria", password: "Strong", address_number: 50})
+  %ElixirApiRestaurant.Client{
     name: "Camila Maria",
     email: "email@email.com",
     document: 81_403_849_099,
@@ -75,7 +75,7 @@ defmodule ElixirApiRestaurant.User do
   ```
 
   """
-  def update!(%__MODULE__{} = base_user, %{} = new_data_fields) do
-    struct(base_user, new_data_fields)
+  def update!(%__MODULE__{} = base_client, %{} = new_data_fields) do
+    struct(base_client, new_data_fields)
   end
 end

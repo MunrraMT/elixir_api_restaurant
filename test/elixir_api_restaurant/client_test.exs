@@ -1,14 +1,14 @@
-defmodule ElixirApiRestaurant.UserTest do
+defmodule ElixirApiRestaurant.ClientTest do
   use ExUnit.Case, async: true
 
-  alias ElixirApiRestaurant.User
+  alias ElixirApiRestaurant.Client
 
-  doctest(User)
+  doctest(Client)
 
   describe "build!/1" do
-    test "should returns User struct" do
+    test "should returns Client struct" do
       result_build =
-        User.build!(%{
+        Client.build!(%{
           name: "Maria Belizário",
           email: "email@email.com",
           document: 81_403_849_099,
@@ -23,7 +23,7 @@ defmodule ElixirApiRestaurant.UserTest do
 
       %struct_name{} = result_build
 
-      assert struct_name == User
+      assert struct_name == Client
       assert Map.get(result_build, :name) == "Maria Belizário"
       assert Map.get(result_build, :email) == "email@email.com"
       assert Map.get(result_build, :password) == "123456"
@@ -33,9 +33,9 @@ defmodule ElixirApiRestaurant.UserTest do
   end
 
   describe "update!/2" do
-    test "should return modified user structure based on fields passed by argument" do
-      base_user =
-        User.build!(%{
+    test "should return modified Client structure based on fields passed by argument" do
+      base_client =
+        Client.build!(%{
           name: "Maria Belizário",
           email: "email@email.com",
           document: 81_403_849_099,
@@ -48,10 +48,10 @@ defmodule ElixirApiRestaurant.UserTest do
           zip_code: 78_000_000
         })
 
-      modified_user = User.update!(base_user, %{name: "Camila Maria", password: "Strong"})
+      modified_client = Client.update!(base_client, %{name: "Camila Maria", password: "Strong"})
 
-      assert Map.get(modified_user, :name) == "Camila Maria"
-      assert Map.get(modified_user, :password) == "Strong"
+      assert Map.get(modified_client, :name) == "Camila Maria"
+      assert Map.get(modified_client, :password) == "Strong"
     end
   end
 end
