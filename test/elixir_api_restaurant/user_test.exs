@@ -31,4 +31,27 @@ defmodule ElixirApiRestaurant.UserTest do
       assert Map.get(result_build, :phone) == 65_999_999_999
     end
   end
+
+  describe "update!/2" do
+    test "should return modified user structure based on fields passed by argument" do
+      base_user =
+        User.build!(%{
+          name: "Maria Belizário",
+          email: "email@email.com",
+          document: 81_403_849_099,
+          password: "123456",
+          phone: 65_999_999_999,
+          address_street: "street",
+          address_number: 15,
+          address_city: "Várzea Grande",
+          address_state: "Mato Grosso",
+          zip_code: 78_000_000
+        })
+
+      modified_user = User.update!(base_user, %{name: "Camila Maria", password: "Strong"})
+
+      assert Map.get(modified_user, :name) == "Camila Maria"
+      assert Map.get(modified_user, :password) == "Strong"
+    end
+  end
 end
