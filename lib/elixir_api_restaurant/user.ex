@@ -3,10 +3,23 @@ defmodule ElixirApiRestaurant.User do
   Módulo de usuário (cliente do restaurante)
   """
 
-  defstruct [:name, :email, :document, :password, :phone, address: %{}]
+  @enforce_keys [:name, :email, :password, :document, :phone]
+
+  defstruct [
+    :name,
+    :email,
+    :password,
+    :document,
+    :phone,
+    :address_street,
+    :address_number,
+    :address_city,
+    :address_state,
+    :zip_code
+  ]
 
   @doc ~S"""
-  Gera a estrutura de um usuário com UUID
+  Gera a estrutura de um usuário
 
   ## Parameters
 
@@ -15,43 +28,23 @@ defmodule ElixirApiRestaurant.User do
   ## Examples
 
   ```elixir
-  iex> User.build!(%{name: "Maria Belizário", email: "email@email.com", document: 00000000000, password: "123456", phone: 65_999_999_999, street: "street", number: 15, city: "Várzea Grande", state: "Mato Grosso", zip_code: 78_000_000})
+  iex> User.build!(%{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
   %ElixirApiRestaurant.User{
     name: "Maria Belizário",
     email: "email@email.com",
-    document: 00000000000,
+    document: 81_403_849_099,
     password: "123456",
     phone: 65999999999,
-    address: %{
-      city: "Várzea Grande",
-      number: 15,
-      state: "Mato Grosso",
-      street: "street",
-      zip_code: 78000000
-    }
+    address_city: "Várzea Grande",
+    address_number: 15,
+    address_state: "Mato Grosso",
+    address_street: "street",
+    zip_code: 78000000
   }
   ```
 
   """
-  def build!(%{
-        name: name,
-        email: email,
-        document: document,
-        password: password,
-        phone: phone,
-        street: street,
-        number: number,
-        city: city,
-        state: state,
-        zip_code: zip_code
-      }) do
-    %__MODULE__{
-      name: name,
-      email: email,
-      document: document,
-      password: password,
-      phone: phone,
-      address: %{street: street, number: number, city: city, state: state, zip_code: zip_code}
-    }
+  def build!(%{} = new_user) do
+    struct(__MODULE__, new_user)
   end
 end
