@@ -23,7 +23,7 @@ defmodule ElixirApiRestaurant.User do
 
   ## Parameters
 
-  - Mapa Contendo: name, email, password, phone, street, number, city, state e zipcode.
+  - Mapa Contendo: name, email, password, phone, address_street, address_number, address_city, address_state e zipcode.
 
   ## Examples
 
