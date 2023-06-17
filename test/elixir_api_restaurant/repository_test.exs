@@ -33,4 +33,27 @@ defmodule ElixirApiRestaurant.RepositoryTest do
       end
     end
   end
+
+  describe "delete_client!/1" do
+    test "should delete file client data" do
+      client =
+        Client.build!(%{
+          name: "Maria Belizário",
+          email: "email@email.com",
+          document: 81_403_849_099,
+          password: "123456",
+          phone: 65_999_999_999,
+          address_street: "street",
+          address_number: 15,
+          address_city: "Várzea Grande",
+          address_state: "Mato Grosso",
+          zip_code: 78_000_000
+        })
+
+      Repository.save_client!(client)
+      Repository.delete_client!(client)
+
+      assert File.exists?(@db_folder) === false
+    end
+  end
 end
