@@ -28,6 +28,13 @@ defmodule ElixirApiRestaurant.Repository do
     |> File.write!(:erlang.term_to_binary(client))
   end
 
+  def delete_client!(%Client{} = client) do
+    case @db_folder |> File.exists?() do
+      true ->
+        "#{@db_folder}/#{get_filename(client)}" |> File.rm!()
+    end
+  end
+
   defp get_filename(client) do
     client
     |> Map.get(:name)
