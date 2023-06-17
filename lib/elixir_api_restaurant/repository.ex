@@ -28,6 +28,21 @@ defmodule ElixirApiRestaurant.Repository do
     |> File.write!(:erlang.term_to_binary(client))
   end
 
+  @doc ~S"""
+  Deleta arquivo de cadastro de cliente
+
+  ## Parameters
+
+  - Struct de cliente
+
+  ## Examples
+
+  ```elixir
+  iex(1)> Repository.save_client!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex(2)> Repository.delete_client!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  ```
+
+  """
   def delete_client!(%Client{} = client) do
     case @db_folder |> File.exists?() do
       true ->
