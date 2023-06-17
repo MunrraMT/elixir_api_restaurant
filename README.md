@@ -36,6 +36,17 @@
   - Gerar relatórios de vendas diárias, semanais e mensais.
   - Mostrar informações como os pratos mais pedidos, as mesas mais frequentadas e as receitas geradas.
 
+## Test Coverage
+
+| Percentage  | Module                          |
+| ----------- | ------------------------------- |
+| 100.00%     | ElixirApiRestaurant             |
+| 100.00%     | ElixirApiRestaurant.Application |
+| 100.00%     | ElixirApiRestaurant.Client      |
+| 100.00%     | ElixirApiRestaurant.Repository  |
+| ----------- | --------------------------      |
+| 100.00%     | Total                           |
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
