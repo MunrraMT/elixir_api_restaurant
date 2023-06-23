@@ -17,11 +17,11 @@ defmodule ElixirApiRestaurant.Repository do
   ## Examples
 
   ```elixir
-  iex> Repository.save_client!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex> Repository.save!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
   ```
 
   """
-  def save_client!(%Client{} = client) do
+  def save!(%Client{} = client) do
     @db_folder |> File.mkdir_p!()
 
     "#{@db_folder}/#{get_filename(client)}"
@@ -38,12 +38,12 @@ defmodule ElixirApiRestaurant.Repository do
   ## Examples
 
   ```elixir
-  iex(1)> Repository.save_client!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
-  iex(2)> Repository.delete_client!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex(1)> Repository.save!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex(2)> Repository.delete!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
   ```
 
   """
-  def delete_client!(%Client{} = client) do
+  def delete!(%Client{} = client) do
     case @db_folder |> File.exists?() do
       true ->
         "#{@db_folder}/#{get_filename(client)}" |> File.rm!()

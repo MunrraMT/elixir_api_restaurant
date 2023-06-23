@@ -7,7 +7,7 @@ defmodule ElixirApiRestaurant.RepositoryTest do
 
   doctest(Repository)
 
-  describe "save_client!/1" do
+  describe "save!/1" do
     test "should create file for save client data" do
       client =
         Client.build!(%{
@@ -23,7 +23,7 @@ defmodule ElixirApiRestaurant.RepositoryTest do
           zip_code: 78_000_000
         })
 
-      Repository.save_client!(client)
+      Repository.save!(client)
 
       try do
         assert File.exists?(@db_folder)
@@ -34,7 +34,7 @@ defmodule ElixirApiRestaurant.RepositoryTest do
     end
   end
 
-  describe "delete_client!/1" do
+  describe "delete!/1" do
     test "should delete file client data" do
       client =
         Client.build!(%{
@@ -50,8 +50,8 @@ defmodule ElixirApiRestaurant.RepositoryTest do
           zip_code: 78_000_000
         })
 
-      Repository.save_client!(client)
-      Repository.delete_client!(client)
+      Repository.save!(client)
+      Repository.delete!(client)
 
       assert File.exists?(@db_folder) === false
     end
