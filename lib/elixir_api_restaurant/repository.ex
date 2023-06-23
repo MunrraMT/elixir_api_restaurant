@@ -5,54 +5,47 @@ defmodule ElixirApiRestaurant.Repository do
 
   @db_folder "./persist"
 
-  alias ElixirApiRestaurant.Client
-
   @doc ~S"""
-  Salva o cliente em um arquivo em formato de erlang binário
+  Cria um arquivo com o nome do arquivo e o conteúdo passado por argumento.
 
   ## Parameters
 
-  - Struct de cliente
+  - Nome do arquivo
+  - Conteúdo elixir
 
   ## Examples
 
   ```elixir
-  iex> Repository.save!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex> Repository.save!("nome_arquivo", %{nome: "Maria da silva", idade: 26})
   ```
 
   """
-  def save!(%Client{} = client) do
+  def save!(filename, content) do
     @db_folder |> File.mkdir_p!()
 
-    "#{@db_folder}/#{get_filename(client)}"
-    |> File.write!(:erlang.term_to_binary(client))
+    "#{@db_folder}/#{filename}"
+    |> File.write!(:erlang.term_to_binary(content))
   end
 
   @doc ~S"""
-  Deleta arquivo de cadastro de cliente
+  Deleta o arquivo com o nome passado por argumento.
 
   ## Parameters
 
-  - Struct de cliente
+  - Nome do arquivo
 
   ## Examples
 
   ```elixir
-  iex(1)> Repository.save!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
-  iex(2)> Repository.delete!(%ElixirApiRestaurant.Client{name: "Maria Belizário", email: "email@email.com", document: 81_403_849_099, password: "123456", phone: 65_999_999_999, address_street: "street", address_number: 15, address_city: "Várzea Grande", address_state: "Mato Grosso", zip_code: 78_000_000})
+  iex(1)> Repository.save!("nome_arquivo", %{nome: "Maria da silva", idade: 26})
+  iex(2)> Repository.delete!("nome_arquivo")
   ```
 
   """
-  def delete!(%Client{} = client) do
+  def delete!(filename) do
     case @db_folder |> File.exists?() do
       true ->
-        "#{@db_folder}/#{get_filename(client)}" |> File.rm!()
+        "#{@db_folder}/#{filename}" |> File.rm!()
     end
-  end
-
-  defp get_filename(client) do
-    client
-    |> Map.get(:name)
-    |> Slug.slugify()
   end
 end

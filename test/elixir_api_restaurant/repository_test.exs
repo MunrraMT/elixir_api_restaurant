@@ -1,59 +1,37 @@
 defmodule ElixirApiRestaurant.RepositoryTest do
-  @db_folder "./persist/maria-belizario"
-
   use ExUnit.Case, async: true
 
-  alias ElixirApiRestaurant.{Repository, Client}
+  alias ElixirApiRestaurant.Repository
 
   doctest(Repository)
 
   describe "save!/1" do
-    test "should create file for save client data" do
-      client =
-        Client.build!(%{
-          name: "Maria Belizário",
-          email: "email@email.com",
-          document: 81_403_849_099,
-          password: "123456",
-          phone: 65_999_999_999,
-          address_street: "street",
-          address_number: 15,
-          address_city: "Várzea Grande",
-          address_state: "Mato Grosso",
-          zip_code: 78_000_000
-        })
+    test "should create file for save data" do
+      content_for_save = %{nome: "Maria da silva", idade: 26}
+      filename = "nome_arquivo"
+      path_to_file = "./persist/#{filename}"
 
-      Repository.save!(client)
+      Repository.save!(filename, content_for_save)
 
       try do
-        assert File.exists?(@db_folder)
-        assert File.read!(@db_folder) |> :erlang.binary_to_term() == client
+        assert File.exists?(path_to_file)
+        assert File.read!(path_to_file) |> :erlang.binary_to_term() == content_for_save
       after
-        File.rm!(@db_folder)
+        File.rm!(path_to_file)
       end
     end
   end
 
   describe "delete!/1" do
-    test "should delete file client data" do
-      client =
-        Client.build!(%{
-          name: "Maria Belizário",
-          email: "email@email.com",
-          document: 81_403_849_099,
-          password: "123456",
-          phone: 65_999_999_999,
-          address_street: "street",
-          address_number: 15,
-          address_city: "Várzea Grande",
-          address_state: "Mato Grosso",
-          zip_code: 78_000_000
-        })
+    test "should delete file data" do
+      content_for_save = %{nome: "Maria da silva", idade: 26}
+      filename = "nome_arquivo"
+      path_to_file = "./persist/#{filename}"
 
-      Repository.save!(client)
-      Repository.delete!(client)
+      Repository.save!(filename, content_for_save)
+      Repository.delete!(filename)
 
-      assert File.exists?(@db_folder) === false
+      assert File.exists?(path_to_file) === false
     end
   end
 end
